@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ProvidersService } from './providers.service';
+import { TypeormModule } from './typeorm/typeorm.module';
 
 @Module({
-  providers: [ProvidersService],
-  exports: [ProvidersService],
+  providers: [],
+  exports: [],
+  imports: [TypeormModule],
 })
 export class ProvidersModule {}
