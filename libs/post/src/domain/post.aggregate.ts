@@ -24,6 +24,7 @@ export class PostAggregate extends PostServices implements IPost {
   message: string;
 
   @IsUUID()
+  @IsNotEmpty()
   authorId: string;
 
   @IsBoolean()
