@@ -1,19 +1,20 @@
 import { IPost } from './post.interface';
-import { randomStringGenerator } from '@nestjs/common/utils/random-string-generator.util';
 import { PostServices } from './services';
 import {
   IsBoolean,
   IsNotEmpty,
   IsString,
   IsUUID,
+  isUUID,
   validateSync,
 } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import { DomainError } from '@lib/errors';
+import { randomUUID } from 'crypto';
 
 export class PostAggregate extends PostServices implements IPost {
   @IsUUID()
-  id: string = randomStringGenerator();
+  id: string = randomUUID();
 
   @IsString()
   @IsNotEmpty()
@@ -43,10 +44,18 @@ export class PostAggregate extends PostServices implements IPost {
 
   static create(post: Partial<IPost>) {
     const _post = new PostAggregate();
+
+    // if (post?.id && !isUUID(post.id)) {
+    //   throw new DomainError([], 'Invalid UUID for id');
+    // }
+    // if (post?.authorId && !isUUID(post.authorId)) {
+    //   throw new DomainError([], 'Invalid UUID for authorId');
+    // }
+
     Object.assign(_post, post);
     _post.updatedAt = post?.id ? new Date().toISOString() : _post.updatedAt;
     const errors = validateSync(_post, { whitelist: true });
-    if (!!errors.length) {
+    if (errors.length > 0) {
       throw new DomainError(errors, 'Post validation failed');
     }
     return _post;
