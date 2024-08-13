@@ -1,9 +1,11 @@
 import { PostFacade } from '@lib/post/application-services';
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { CreatePostDto } from './dto';
 import { CurrentUser, ICurrentUser } from '@lib/auth';
 import { randomUUID } from 'crypto';
+import { JwtGuard } from '@lib/auth/guards/jwt.guard';
 
+@UseGuards(JwtGuard)
 @Controller('post')
 export class PostController {
   constructor(private readonly postFacade: PostFacade) {}
@@ -15,8 +17,7 @@ export class PostController {
   ) {
     return this.postFacade.commands.createPost({
       ...createPostDto,
-      authorId: randomUUID(),
-      // authorId: user.userId,
+      authorId: user.userId,
     });
   }
 }

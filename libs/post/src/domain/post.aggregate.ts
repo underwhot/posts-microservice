@@ -44,14 +44,6 @@ export class PostAggregate extends PostServices implements IPost {
 
   static create(post: Partial<IPost>) {
     const _post = new PostAggregate();
-
-    // if (post?.id && !isUUID(post.id)) {
-    //   throw new DomainError([], 'Invalid UUID for id');
-    // }
-    // if (post?.authorId && !isUUID(post.authorId)) {
-    //   throw new DomainError([], 'Invalid UUID for authorId');
-    // }
-
     Object.assign(_post, post);
     _post.updatedAt = post?.id ? new Date().toISOString() : _post.updatedAt;
     const errors = validateSync(_post, { whitelist: true });

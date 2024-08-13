@@ -22,6 +22,7 @@ const options = (): DataSourceOptions => {
     entities: [PostEntity],
     migrationsRun: true,
     migrationsTableName: 'migrations',
+    // synchronize: true,
   };
 };
 
