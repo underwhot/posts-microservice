@@ -23,6 +23,7 @@ export class SetPublishedCommandHandler
 
     const postAggregate = PostAggregate.create(existPost);
     postAggregate.setPublished();
+    postAggregate.plainToInstance();
     await this.postRepository.save(postAggregate);
     return postAggregate;
   }

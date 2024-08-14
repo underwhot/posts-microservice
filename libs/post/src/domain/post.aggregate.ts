@@ -46,7 +46,7 @@ export class PostAggregate extends PostServices implements IPost {
     const _post = new PostAggregate();
     Object.assign(_post, post);
     _post.updatedAt = post?.id ? new Date().toISOString() : _post.updatedAt;
-    const errors = validateSync(_post, { whitelist: true });
+    const errors = validateSync(_post);
     if (errors.length > 0) {
       throw new DomainError(errors, 'Post validation failed');
     }
