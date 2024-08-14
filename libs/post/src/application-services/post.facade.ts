@@ -4,7 +4,7 @@ import { CreatePostDto, UpdatePostDto } from './commands/dto';
 import {
   CreatePostCommand,
   CreatePostCommandHandler,
-  DeletePosCommandtHandler,
+  DeletePostCommandHandler,
   DeletePostCommand,
   SetPublishedCommand,
   SetPublishedCommandHandler,
@@ -61,9 +61,9 @@ export class PostFacade {
   }
 
   private deletePost(id: string) {
-    return this.queryBus.execute<
+    return this.commandBus.execute<
       DeletePostCommand,
-      DeletePosCommandtHandler['execute']
+      DeletePostCommandHandler['execute']
     >(new DeletePostCommand(id));
   }
 

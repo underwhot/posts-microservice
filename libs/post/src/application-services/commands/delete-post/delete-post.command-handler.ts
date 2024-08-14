@@ -5,10 +5,10 @@ import { BadRequestException, Logger } from '@nestjs/common';
 import { PostAggregate } from '@lib/post/domain';
 
 @CommandHandler(DeletePostCommand)
-export class DeletePosCommandtHandler
+export class DeletePostCommandHandler
   implements ICommandHandler<DeletePostCommand, boolean>
 {
-  private readonly logger = new Logger(DeletePosCommandtHandler.name);
+  private readonly logger = new Logger(DeletePostCommandHandler.name);
   constructor(private readonly postRepository: PostRepository) {}
 
   async execute({ id }: DeletePostCommand): Promise<boolean> {
