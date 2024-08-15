@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type PaginatedPosts {
+  data: [PostResponse!]
+  limit: Int!
+  offset: Int!
+  total: Int!
+}
+
 type PostResponse {
   """Post author id"""
   authorId: String!
@@ -23,5 +30,12 @@ type PostResponse {
 }
 
 type Query {
+  getAllPosts(
+    """Limit"""
+    limit: Int! = 15
+
+    """Offset"""
+    offset: Int! = 0
+  ): PaginatedPosts!
   getPostById(id: String!): PostResponse!
 }
