@@ -24,6 +24,10 @@ async function bootstrap() {
       `Swagger is running on: http://localhost:${port}/api-docs`,
       'Main',
     );
+    Logger.log(
+      `GraphQL playground is running on: http://localhost:${port}/graphql`,
+      'Main',
+    );
   });
 }
 bootstrap();
