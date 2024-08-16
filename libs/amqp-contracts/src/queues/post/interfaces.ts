@@ -1,6 +1,7 @@
 export interface CreatePostRequest {
-  messate: string;
+  message: string;
   title: string;
+  authorId: string;
 }
 
 export interface CreatePostResponse {
