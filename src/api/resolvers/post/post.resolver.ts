@@ -1,8 +1,10 @@
 import { PostFacade } from '@lib/post/application-services';
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PaginatedPosts, PostResponse } from '../responses';
 import { PaginationDto } from '@lib/shared';
 import { plainToInstance } from 'class-transformer';
+import { CreatePostInput } from '../inputs';
+import { randomUUID } from 'crypto';
 
 @Resolver(() => PostResponse)
 export class PostResolver {
@@ -24,5 +26,13 @@ export class PostResolver {
       data,
       total: count,
     };
+  }
+
+  @Mutation(() => PostResponse)
+  async createPost(@Args('createPostInput') createPostInput: CreatePostInput) {
+    return this.postFacade.commands.createPost({
+      ...createPostInput,
+      authorId: randomUUID(),
+    });
   }
 }
