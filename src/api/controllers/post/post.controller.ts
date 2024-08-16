@@ -69,7 +69,6 @@ export class PostController {
     @Query() paginationDto: PaginationDto,
   ): Promise<ResponseWithPagination<PostAggregate>> {
     const pagination = plainToInstance(PaginationDto, paginationDto);
-    // @ts-ignore
     const [data, count] = await this.postFacade.queries.getAllPosts(pagination);
 
     return {
