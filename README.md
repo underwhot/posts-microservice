@@ -3,7 +3,7 @@ RestAPI, GraphQL, Postgress, TypeORM, Swagger, RabbitMQ
 
 ## Getting Started
 
-Congigure .env via .env.example.<br>
+Configure .env via .env.example.<br>
 
 Pull repository and install dependencies:
 
