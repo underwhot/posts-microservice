@@ -22,6 +22,13 @@ export class AllExcentionsFilter<T> implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
+    if (['graphql'].includes(host.getType())) {
+      throw new HttpException(
+        this._response(status, request, exception),
+        status,
+      );
+    }
+
     response.status(status).json(this._response(status, request, exception));
   }
   private _response(status: number, request: Request, exeption: any) {
