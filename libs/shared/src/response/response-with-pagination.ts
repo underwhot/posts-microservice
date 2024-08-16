@@ -9,18 +9,6 @@ import { Type, applyDecorators } from '@nestjs/common';
 
 export class ResponseWithPagination<T> extends PaginationDto {
   @ApiProperty({
-    description: 'Number of entities per page',
-    type: 'number',
-  })
-  limit: number;
-
-  @ApiProperty({
-    description: 'Number of lines skipped',
-    type: 'number',
-  })
-  offset: number;
-
-  @ApiProperty({
     description: 'Total number of entities in database',
     type: 'number',
   })
