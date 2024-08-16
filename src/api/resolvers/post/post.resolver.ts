@@ -3,7 +3,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PaginatedPosts, PostResponse } from '../responses';
 import { PaginationDto } from '@lib/shared';
 import { plainToInstance } from 'class-transformer';
-import { CreatePostInput } from '../inputs';
+import { CreatePostInput, UpdatePostInput } from '../inputs';
 import { randomUUID } from 'crypto';
 
 @Resolver(() => PostResponse)
@@ -32,6 +32,14 @@ export class PostResolver {
   async createPost(@Args('createPostInput') createPostInput: CreatePostInput) {
     return this.postFacade.commands.createPost({
       ...createPostInput,
+      authorId: randomUUID(),
+    });
+  }
+
+  @Mutation(() => PostResponse)
+  async updatePost(@Args('updatePostInput') updatePostInput: UpdatePostInput) {
+    return this.postFacade.commands.updatePost({
+      ...updatePostInput,
       authorId: randomUUID(),
     });
   }

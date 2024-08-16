@@ -10,6 +10,7 @@ input CreatePostInput {
 type Mutation {
   createPost(createPostInput: CreatePostInput!): PostResponse!
   setPublished(id: String!): PostResponse!
+  updatePost(updatePostInput: UpdatePostInput!): PostResponse!
 }
 
 type PaginatedPosts {
@@ -48,4 +49,10 @@ type Query {
     offset: Int! = 0
   ): PaginatedPosts!
   getPostById(id: String!): PostResponse!
+}
+
+input UpdatePostInput {
+  id: ID!
+  message: String
+  title: String
 }
